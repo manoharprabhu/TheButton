@@ -1,0 +1,41 @@
+.number-container {
+  position: relative;
+  width: 100px;
+  height: 140px;
+  font-family: monospace;
+  float: left;
+}
+
+.black {
+  color: black;
+}
+
+.number-value {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 9em;
+  text-align: center;
+}
+
+.black-number-top-flap {
+  position: absolute;
+  display: block;
+  top: 3px;
+  left: 3px;
+  width: 94px;
+  height: 66px;
+  box-sizing: border-box;
+  background-image: -webkit-gradient( linear, left top, left bottom, from(rgba(150, 150, 150, 0.5)), to(rgba(150, 150, 150, 0.2)), color-stop(.2, #999999));
+}
+
+.black-number-bottom-flap {
+  position: absolute;
+  display: block;
+  top: 71px;
+  left: 3px;
+  width: 94px;
+  height: 66px;
+  box-sizing: border-box;
+  background-image: -webkit-gradient( linear, left bottom, left top, from(rgba(150, 150, 150, 0.5)), to(rgba(150, 150, 150, 0.2)), color-stop(.2, #999999));
+}

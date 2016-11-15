@@ -1,0 +1,13 @@
+.timer-wrapper {
+  padding: 30px;
+  border: 1px solid;
+  width: 510px;
+  height: 180px;
+}
+
+.empty {
+  float: left;
+  width: 10px;
+  position: relative;
+  height: 140px;
+}
