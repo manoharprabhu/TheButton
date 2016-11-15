@@ -128,11 +128,11 @@ class TimerComponent extends React.Component {
         <div className="timer-wrapper">
           {(this.state.displayMinutes).split("").map(function(item, index) {
             let num = parseInt(item);
-            return <DigitComponent displayNumber={num} key={index}/>
+            return <DigitComponent displayNumber={num} numType={1} key={index}/>
           })}
           <div className="empty"/> {(this.state.displaySeconds).split("").map(function(item, index) {
             let num = parseInt(item);
-            return <DigitComponent displayNumber={num} key={index}/>
+            return <DigitComponent displayNumber={num} numType={0} key={index}/>
           })}
         </div>
         <textarea className="input-keyboard" placeholder="$" ref="inputKeyboard" onKeyPress={this.execute} onChange={this.handleChange}></textarea>

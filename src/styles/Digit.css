@@ -7,7 +7,11 @@
 }
 
 .black {
-  color: black;
+  color: #232323;
+}
+
+.white {
+  color: #EFEFEF;
 }
 
 .number-value {
@@ -24,7 +28,7 @@
   top: 3px;
   left: 3px;
   width: 94px;
-  height: 66px;
+  height: 67px;
   box-sizing: border-box;
   background-image: -webkit-gradient( linear, left top, left bottom, from(rgba(150, 150, 150, 0.5)), to(rgba(150, 150, 150, 0.2)), color-stop(.2, #999999));
 }
@@ -35,7 +39,31 @@
   top: 71px;
   left: 3px;
   width: 94px;
-  height: 66px;
+  height: 67px;
   box-sizing: border-box;
   background-image: -webkit-gradient( linear, left bottom, left top, from(rgba(150, 150, 150, 0.5)), to(rgba(150, 150, 150, 0.2)), color-stop(.2, #999999));
+}
+
+.white-number-top-flap {
+  position: absolute;
+  display: block;
+  top: 3px;
+  left: 3px;
+  width: 94px;
+  height: 67px;
+  box-sizing: border-box;
+  background-image: -webkit-gradient( linear, left top, left bottom, from(rgba(150, 150, 150, 0.5)), to(rgba(150, 150, 150, 0.2)), color-stop(.2, #000000));
+  z-index: -99;
+}
+
+.white-number-bottom-flap {
+  position: absolute;
+  display: block;
+  top: 71px;
+  left: 3px;
+  width: 94px;
+  height: 67px;
+  box-sizing: border-box;
+  background-image: -webkit-gradient( linear, left bottom, left top, from(rgba(150, 150, 150, 0.5)), to(rgba(150, 150, 150, 0.2)), color-stop(.2, #000000));
+  z-index: -99;
 }
