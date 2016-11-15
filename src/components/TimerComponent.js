@@ -13,17 +13,22 @@ class TimerComponent extends React.Component {
     * displayMinutes and displaySeconds store the formatted number as string that has to be displayed
     **/
     this.state = {
-      currentMinutes: 108,
-      currentSeconds: 0,
+      currentMinutes: 0,
+      currentSeconds: 10,
       displayMinutes: "108",
       displaySeconds: "00",
       timerObject: null
     };
+  }
 
+  componentDidMount() {
     this.startTimer();
   }
 
   startTimer() {
+    if (this.state.timerObject) {
+      return;
+    }
     var timerObject = setInterval(function() {
       this.decrementTime();
     }.bind(this), 1000);
@@ -32,9 +37,7 @@ class TimerComponent extends React.Component {
 
   stopTimer() {
     var timerObject = this.state.timerObject;
-    if (timerObject) {
-      clearInterval(timerObject);
-    }
+    clearInterval(timerObject);
   }
 
   systemFailure() {
@@ -43,6 +46,8 @@ class TimerComponent extends React.Component {
     * Change timers to hieroglyphs
     * play system failure sound
     */
+    this.stopTimer();
+
   }
 
   decrementTime() {
@@ -55,7 +60,7 @@ class TimerComponent extends React.Component {
     }
     this.setState({currentMinutes: curMin, currentSeconds: curSec});
     this.adjustDisplayFormatted();
-    if (curSec === 0 && curMin === 0) {
+    if (curSec <= 0 && curMin <= 0) {
       this.systemFailure();
     }
   }
@@ -100,6 +105,7 @@ class TimerComponent extends React.Component {
             return <DigitComponent displayNumber={num} key={index}/>
           })}
         </div>
+        <textarea className="input-keyboard" placeholder="$"></textarea>
       </div>
     );
   }

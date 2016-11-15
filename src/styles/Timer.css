@@ -1,8 +1,13 @@
 .timer-wrapper {
+  position: absolute;
   padding: 30px;
   border: 1px solid;
   width: 510px;
   height: 180px;
+  top: 50%;
+  left: 50%;
+  margin-left: -285px;
+  margin-top: -220px;
 }
 
 .empty {
@@ -10,4 +15,14 @@
   width: 10px;
   position: relative;
   height: 140px;
+}
+
+.input-keyboard {
+  background-color: #333333;
+  color: #00FF00;
+  position: absolute;
+  width: 100%;
+  height: 150px;
+  top: 100%;
+  margin-top: -150px;
 }
