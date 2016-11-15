@@ -69,10 +69,14 @@ class TimerComponent extends React.Component {
 
   execute(event) {
     if (event.charCode === 13) {
-      let value = this.state.inputNumber.trim();
-      if (value === '4 8 15 16 23 42') {
-        this.resetCounterWithoutIncident();
+      if (this.state.currentMinutes < 4) {
+        let value = this.state.inputNumber.trim();
+        if (value === '4 8 15 16 23 42') {
+          this.resetCounterWithoutIncident();
+        }
       }
+      event.preventDefault();
+      this.refs.inputKeyboard.value = '';
     }
   }
 
@@ -131,7 +135,7 @@ class TimerComponent extends React.Component {
             return <DigitComponent displayNumber={num} key={index}/>
           })}
         </div>
-        <textarea className="input-keyboard" placeholder="$" onKeyPress={this.execute} onChange={this.handleChange}></textarea>
+        <textarea className="input-keyboard" placeholder="$" ref="inputKeyboard" onKeyPress={this.execute} onChange={this.handleChange}></textarea>
       </div>
     );
   }
