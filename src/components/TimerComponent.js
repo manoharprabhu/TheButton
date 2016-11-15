@@ -13,12 +13,15 @@ class TimerComponent extends React.Component {
     * displayMinutes and displaySeconds store the formatted number as string that has to be displayed
     **/
     this.state = {
-      currentMinutes: 0,
-      currentSeconds: 10,
+      currentMinutes: 108,
+      currentSeconds: 0,
       displayMinutes: "108",
       displaySeconds: "00",
-      timerObject: null
+      timerObject: null,
+      inputNumber: ''
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.execute = this.execute.bind(this);
   }
 
   componentDidMount() {
@@ -26,9 +29,6 @@ class TimerComponent extends React.Component {
   }
 
   startTimer() {
-    if (this.state.timerObject) {
-      return;
-    }
     var timerObject = setInterval(function() {
       this.decrementTime();
     }.bind(this), 1000);
@@ -48,6 +48,32 @@ class TimerComponent extends React.Component {
     */
     this.stopTimer();
 
+  }
+
+  handleChange(event) {
+    this.setState({inputNumber: event.target.value});
+  }
+
+  resetCounterWithoutIncident() {
+    this.setState({
+      currentMinutes: 108,
+      currentSeconds: 0,
+      displayMinutes: "108",
+      displaySeconds: "00",
+      timerObject: null,
+      inputNumber: ''
+    });
+    this.stopTimer();
+    this.startTimer();
+  }
+
+  execute(event) {
+    if (event.charCode === 13) {
+      let value = this.state.inputNumber.trim();
+      if (value === '4 8 15 16 23 42') {
+        this.resetCounterWithoutIncident();
+      }
+    }
   }
 
   decrementTime() {
@@ -105,7 +131,7 @@ class TimerComponent extends React.Component {
             return <DigitComponent displayNumber={num} key={index}/>
           })}
         </div>
-        <textarea className="input-keyboard" placeholder="$"></textarea>
+        <textarea className="input-keyboard" placeholder="$" onKeyPress={this.execute} onChange={this.handleChange}></textarea>
       </div>
     );
   }
