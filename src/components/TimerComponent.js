@@ -14,8 +14,8 @@ class TimerComponent extends React.Component {
     * displayMinutes and displaySeconds store the formatted number as string that has to be displayed
     **/
     this.state = {
-      currentMinutes: 0,
-      currentSeconds: 5,
+      currentMinutes: 108,
+      currentSeconds: 0,
       displayMinutes: "108",
       displaySeconds: "00",
       timerObject: null,
@@ -131,14 +131,30 @@ class TimerComponent extends React.Component {
     return (
       <div>
         <div className={this.state.systemFailureState ? 'timer-wrapper vibrate' : 'timer-wrapper'}>
-          {(this.state.displayMinutes).split("").map(function(item, index) {
-            let num = parseInt(item);
-            return <DigitComponent displayNumber={num} numType={1} key={index}/>
-          })}
-          <div className="empty"/> {(this.state.displaySeconds).split("").map(function(item, index) {
-            let num = parseInt(item);
-            return <DigitComponent displayNumber={num} numType={0} key={index}/>
-          })}
+          {this.state.systemFailureState ?
+          (
+            <div>
+              <DigitComponent hieroglyph={1} key={1}/>
+              <DigitComponent hieroglyph={2} key={2}/>
+              <DigitComponent hieroglyph={3} key={3}/>
+              <DigitComponent hieroglyph={4} key={4}/>
+              <DigitComponent hieroglyph={5} key={5}/>
+            </div>
+          )
+          :
+          (
+            <div>
+            {(this.state.displayMinutes).split("").map(function(item, index) {
+              let num = parseInt(item);
+              return <DigitComponent displayNumber={num} numType={1} key={index}/>
+            })}
+            <div className="empty"/> {(this.state.displaySeconds).split("").map(function(item, index) {
+              let num = parseInt(item);
+              return <DigitComponent displayNumber={num} numType={0} key={index}/>
+            })}
+            </div>
+          )
+          }
         </div>
         <textarea className="input-keyboard" placeholder="$" ref="inputKeyboard" onKeyPress={this.execute} ></textarea>
         <div>
