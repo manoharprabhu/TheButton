@@ -2,6 +2,7 @@
 
 import React from 'react';
 import DigitComponent from './/DigitComponent';
+import Sound from 'react-sound';
 
 require('styles//Timer.css');
 
@@ -18,10 +19,12 @@ class TimerComponent extends React.Component {
       displayMinutes: "108",
       displaySeconds: "00",
       timerObject: null,
-      inputNumber: ''
+      inputNumber: '',
+      systemFailureState: false,
+      systemFailurePlayPosition: 0
     };
-    this.handleChange = this.handleChange.bind(this);
     this.execute = this.execute.bind(this);
+    this.loopSystemFailure = this.loopSystemFailure.bind(this);
   }
 
   componentDidMount() {
@@ -47,11 +50,12 @@ class TimerComponent extends React.Component {
     * play system failure sound
     */
     this.stopTimer();
+    this.setState({systemFailureState: true});
 
   }
 
-  handleChange(event) {
-    this.setState({inputNumber: event.target.value});
+  loopSystemFailure() {
+    this.setState({systemFailurePlayPosition: 0});
   }
 
   resetCounterWithoutIncident() {
@@ -61,7 +65,8 @@ class TimerComponent extends React.Component {
       displayMinutes: "108",
       displaySeconds: "00",
       timerObject: null,
-      inputNumber: ''
+      inputNumber: '',
+      systemFailureState: false
     });
     this.stopTimer();
     this.startTimer();
@@ -70,7 +75,7 @@ class TimerComponent extends React.Component {
   execute(event) {
     if (event.charCode === 13) {
       if (this.state.currentMinutes < 4) {
-        let value = this.state.inputNumber.trim();
+        let value = this.refs.inputKeyboard.value.trim();
         if (value === '4 8 15 16 23 42') {
           this.resetCounterWithoutIncident();
         }
@@ -135,7 +140,15 @@ class TimerComponent extends React.Component {
             return <DigitComponent displayNumber={num} numType={0} key={index}/>
           })}
         </div>
-        <textarea className="input-keyboard" placeholder="$" ref="inputKeyboard" onKeyPress={this.execute} onChange={this.handleChange}></textarea>
+        <textarea className="input-keyboard" placeholder="$" ref="inputKeyboard" onKeyPress={this.execute} ></textarea>
+        <div>
+        <Sound
+          url="failure.wav"
+          playStatus={this.state.systemFailureState === true ? Sound.status.PLAYING : Sound.status.STOPPED}
+          position={this.state.systemFailurePlayPosition}
+          onFinishedPlaying={this.loopSystemFailure}
+        />
+        </div>
       </div>
     );
   }
